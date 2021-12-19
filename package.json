@@ -1,0 +1,44 @@
+{
+  "name": "receiptio",
+  "version": "1.0.0",
+  "description": "A print library for receipt printers, simple and easy API and CLI, printer status support.",
+  "main": "lib/receiptio.js",
+  "bin": {
+    "receiptio": "bin/cli.js"
+  },
+  "directories": {
+    "bin": "bin",
+    "example": "example",
+    "lib": "lib"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/receiptline/receiptio.git"
+  },
+  "keywords": [
+    "thermal",
+    "impact",
+    "printer",
+    "epson",
+    "escpos",
+    "star",
+    "starprnt",
+    "pos",
+    "kiosk",
+    "receipt",
+    "invoice",
+    "kitchen",
+    "ticket",
+    "svg",
+    "markdown"
+  ],
+  "author": "Open Foodservice System Consortium",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/receiptline/receiptio/issues"
+  },
+  "homepage": "https://github.com/receiptline/receiptio#readme",
+  "dependencies": {
+    "receiptline": "^1.6.0"
+  }
+}

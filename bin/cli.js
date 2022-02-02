@@ -62,7 +62,7 @@ const receiptio = require('receiptio');
             // error
             console.error(e.message);
         }
-    } 
+    }
     // info
     console.info(result ? result : `
 usage: receiptio [options] <source>
@@ -89,9 +89,10 @@ result:
   offline(104), disconnect(105), timeout(106)
 examples:
   receiptio -d COM1 receiptmd.txt
+  receiptio -d /dev/usb/lp0 receiptmd.txt
   receiptio -d /dev/ttyS0 -u -b 160 receiptmd.txt
   receiptio -d 192.168.192.168 -p escpos -c 42 receiptmd.txt`);
-    // exit
-    process.exit(code[result]);
+    // exit code
+    process.exitCode = code[result];
 
 })(process.argv.slice(2));

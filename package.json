@@ -1,6 +1,6 @@
 {
   "name": "receiptio",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A print library for receipt printers, simple and easy API and CLI, printer status support.",
   "main": "lib/receiptio.js",
   "bin": {

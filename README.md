@@ -49,18 +49,24 @@ https://github.com/receiptline/receiptline
 # Receipt Printers
 
 - Epson TM series
-- SII RP series
+- Seiko Instruments RP series
 - Star MC series
 - Citizen CT series
 - Fujitsu FP series
 
-Connect with IP address or serial port.  
+Connect with IP address, serial port, or Linux USB device file.  
 (LAN, Bluetooth SPP, USB with virtual serial port driver, ...)  
 
 # Installation
 
 ```bash
-$ npm install receiptio
+$ npm install -g receiptio
+```
+
+If USB is used on Linux, add a user to the `lp` group and reboot to access the device file.  
+
+```bash
+$ sudo gpasswd -a USER lp
 ```
 
 If serial port is used, [Node SerialPort](https://www.npmjs.com/package/serialport) is also required.  
@@ -104,7 +110,7 @@ receiptio.print(receiptmd, options).then(result => {
     - required
   - `-p <printer>`: printer control language
     - `escpos`: ESC/POS (Epson)
-    - `sii`: ESC/POS (SII)
+    - `sii`: ESC/POS (Seiko Instruments)
     - `citizen`: ESC/POS (Citizen)
     - `fit`: ESC/POS (Fujitsu)
     - `impact`: ESC/POS (TM-U220)
@@ -151,7 +157,7 @@ receiptio.print(receiptmd, options).then(result => {
 
 The options are the same as for API.  
 
-```bash
+```console
 usage: receiptio [options] <source>
 source:
   receipt markdown text file
@@ -176,6 +182,7 @@ result:
   offline(104), disconnect(105), timeout(106)
 examples:
   receiptio -d COM1 receiptmd.txt
+  receiptio -d /dev/usb/lp0 receiptmd.txt
   receiptio -d /dev/ttyS0 -u -b 160 receiptmd.txt
   receiptio -d 192.168.192.168 -p escpos -c 42 receiptmd.txt
 ```

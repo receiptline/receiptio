@@ -94,7 +94,7 @@ options:
   -u                upside down
   -s                paper saving (reduce line spacing)
   -n                no paper cut
-  -i                print as image (requires convert-svg-to-png)
+  -i                print as image (requires puppeteer)
   -b <threshold>    image thresholding (0-255)
   -g <gamma>        image gamma correction (0.1-10.0) (default: 1.8)
   -t <timeout>      print timeout (0-3600 sec) (default: 300)

@@ -89,7 +89,8 @@ options:
   -p <printer>      printer control language
                     (default: escpos if -d option is found, svg otherwise)
                     (escpos, sii, citizen, fit, impact, impactb,
-                     star, starline, emustarline, stargraphic)
+                     star, starline, emustarline, stargraphic,
+                     svg, png) (png requires puppeteer)
   -c <chars>        characters per line (24-48) (default: 48)
   -u                upside down
   -s                paper saving (reduce line spacing)
@@ -108,9 +109,9 @@ examples:
   receiptio -d /dev/usb/lp0 receiptmd.txt
   receiptio -d /dev/ttyS0 -u -b 160 receiptmd.txt
   receiptio -d 192.168.192.168 -p escpos -c 42 receiptmd.txt
-  receiptio receiptmd.txt -o receipt.prn
+  receiptio receiptmd.txt -o receipt.svg
   receiptio receiptmd.txt -p escpos -i -b 128 -g 1.0 -o receipt.prn
-  receiptio < receiptmd.txt > receipt.prn
+  receiptio < receiptmd.txt -p png > receipt.png
   echo {c:1234567890} | receiptio | more`);
         process.exitCode = 1;
     }

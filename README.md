@@ -38,7 +38,7 @@ success
 
 # Features
 
-ReceiptIO is a simple print library for receipt printers that prints with easy markdown data for receipts and returns printer status.  
+ReceiptIO is a simple print library for receipt printers that prints with easy markdown data for receipts and returns printer status. Even without a printer, it can output images.  
 
 A development tool is provided to edit and preview the receipt markdown.  
 https://receiptline.github.io/designer/  
@@ -63,7 +63,7 @@ Connect with IP address, serial port, or Linux USB device file.
 $ npm install -g receiptio
 ```
 
-If USB is used on Linux, add a user to the `lp` group and reboot to access the device file.  
+For USB connections on Linux, add a user to the `lp` group and reboot to access the device file.  
 
 ```bash
 $ sudo gpasswd -a USER lp
@@ -75,10 +75,10 @@ If serial port is used, [Node SerialPort](https://www.npmjs.com/package/serialpo
 $ npm install serialport
 ```
 
-When using `-i` option (print as image), [convert-svg-to-png](https://www.npmjs.com/package/convert-svg-to-png) is also required.  
+When using `-i` option (print as image), [puppeteer](https://www.npmjs.com/package/puppeteer) is also required.  
 
 ```bash
-$ npm install convert-svg-to-png
+$ npm install puppeteer
 ```
 
 # Usage
@@ -98,7 +98,7 @@ receiptio.print(receiptmd, options).then(result => {
 
 ### Method
 
-`receiptio.print(receiptmd, options)`  
+`receiptio.print(receiptmd[, options])`  
 
 ### Parameters
 
@@ -107,7 +107,7 @@ receiptio.print(receiptmd, options).then(result => {
     - https://receiptline.github.io/designer/
 - `options` &lt;string&gt;
   - `-d <destination>`: ip address or serial port of target printer
-    - required
+    - Without `-d` option, the destination is the return value
   - `-p <printer>`: printer control language
     - `escpos`: ESC/POS (Epson)
     - `sii`: ESC/POS (Seiko Instruments)
@@ -119,20 +119,23 @@ receiptio.print(receiptmd, options).then(result => {
     - `starline`: Star Line Mode
     - `emustarline`: Command Emulator Star Line Mode
     - `stargraphic`: Star Graphic Mode
-    - default: `escpos`
+    - `svg`: SVG
+    - `png`: PNG (requires puppeteer)
+    - default: `escpos` (with `-d` option) `svg` (without `-d` option)
   - `-c <chars>`: characters per line
     - range: `24`-`48`
     - default: `48`
   - `-u`: upside down
   - `-s`: paper saving (reduce line spacing)
   - `-n`: no paper cut
-  - `-i`: print as image (requires convert-svg-to-png)
+  - `-i`: print as image (requires puppeteer)
   - `-b <threshold>`: image thresholding
     - range: `0`-`255`
   - `-g <gamma>`: image gamma correction
     - range: `0.1`-`10.0`
     - default: `1.8`
   - `-t <timeout>`: print timeout (sec)
+    - range: `0`-`3600`
     - default: `300`
   - `-l <language>`: language of receipt markdown text
     - `en`, `fr`, `de`, `es`, `po`, `it`, `ru`, ...: Multilingual (cp437, 852, 858, 866, 1252 characters)
@@ -144,7 +147,7 @@ receiptio.print(receiptmd, options).then(result => {
 
 ### Return value
 
-- &lt;string&gt;
+- With `-d` option &lt;string&gt;
   - `success`: printing success
   - `coveropen`: printer cover is open
   - `paperempty`: no receipt paper
@@ -152,32 +155,67 @@ receiptio.print(receiptmd, options).then(result => {
   - `offline`: printer is off or offline
   - `disconnect`: printer is not connected
   - `timeout`: print timeout
+- Without `-d` option &lt;string&gt;
+  - printer commands or images
+
+## Transform stream API
+
+`receiptio.createPrint()` method is the stream version of the `receiptio.print()`.  
+
+```javascript
+const fs = require('fs');
+const receiptio = require('receiptio');
+
+const source = fs.createReadStream('example.txt');
+const transform = receiptio.createPrint('-p svg');
+const destination = fs.createWriteStream('example.svg');
+
+source.pipe(transform).pipe(destination);
+```
+
+### Method
+
+`receiptio.createPrint([options])`  
+
+### Parameters
+
+- `options` &lt;string&gt;
+
+### Return value
+
+- Transform stream &lt;stream.Transform&gt;
 
 ## CLI
 
-The options are the same as for API.  
+The options are almost the same as for API.  
 
 ```console
-usage: receiptio [options] <source>
+usage: receiptio [options] [source]
 source:
   receipt markdown text file
   https://receiptline.github.io/designer/
+  if source is not found, standard input
 options:
-  -d <destination>  ip address or serial port of target printer (required)
-  -p <printer>      printer control language (default: escpos)
+  -h                show help
+  -d <destination>  ip address or serial/usb port of target printer
+  -o <outfile>      file to output (if -d option is not found)
+                    if -d and -o are not found, standard output
+  -p <printer>      printer control language
+                    (default: escpos if -d option is found, svg otherwise)
                     (escpos, sii, citizen, fit, impact, impactb,
-                     star, starline, emustarline, stargraphic)
+                     star, starline, emustarline, stargraphic,
+                     svg, png) (png requires puppeteer)
   -c <chars>        characters per line (24-48) (default: 48)
   -u                upside down
   -s                paper saving (reduce line spacing)
   -n                no paper cut
-  -i                print as image (requires convert-svg-to-png)
+  -i                print as image (requires puppeteer)
   -b <threshold>    image thresholding (0-255)
   -g <gamma>        image gamma correction (0.1-10.0) (default: 1.8)
-  -t <timeout>      print timeout (sec) (default: 300)
+  -t <timeout>      print timeout (0-3600 sec) (default: 300)
   -l <language>     language of source file (default: system locale)
                     (en, fr, de, es, po, it, ru, ja, ko, zh-hans, zh-hant, ...)
-result:
+print results:
   success(0), coveropen(101), paperempty(102), error(103),
   offline(104), disconnect(105), timeout(106)
 examples:
@@ -185,6 +223,10 @@ examples:
   receiptio -d /dev/usb/lp0 receiptmd.txt
   receiptio -d /dev/ttyS0 -u -b 160 receiptmd.txt
   receiptio -d 192.168.192.168 -p escpos -c 42 receiptmd.txt
+  receiptio receiptmd.txt -o receipt.svg
+  receiptio receiptmd.txt -p escpos -i -b 128 -g 1.0 -o receipt.prn
+  receiptio < receiptmd.txt -p png > receipt.png
+  echo {c:1234567890} | receiptio | more
 ```
 
 # License

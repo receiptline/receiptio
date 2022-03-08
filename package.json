@@ -1,6 +1,6 @@
 {
   "name": "receiptio",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "A print library for receipt printers, simple and easy API and CLI, printer status support.",
   "main": "lib/receiptio.js",
   "bin": {
@@ -39,6 +39,6 @@
   },
   "homepage": "https://github.com/receiptline/receiptio#readme",
   "dependencies": {
-    "receiptline": "^1.6.0"
+    "receiptline": "^1.8.0"
   }
 }

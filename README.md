@@ -72,13 +72,13 @@ $ sudo gpasswd -a USER lp
 If serial port is used, [Node SerialPort](https://www.npmjs.com/package/serialport) is also required.  
 
 ```bash
-$ npm install serialport
+$ npm install -g serialport
 ```
 
-When using `-i` option (print as image), [puppeteer](https://www.npmjs.com/package/puppeteer) is also required.  
+When using `-i` (print as image) or `-p png` (convert to png) option, [puppeteer](https://www.npmjs.com/package/puppeteer) is also required.  
 
 ```bash
-$ npm install puppeteer
+$ npm install -g puppeteer
 ```
 
 # Usage
@@ -106,7 +106,7 @@ receiptio.print(receiptmd, options).then(result => {
   - receipt markdown text
     - https://receiptline.github.io/designer/
 - `options` &lt;string&gt;
-  - `-d <destination>`: ip address or serial port of target printer
+  - `-d <destination>`: ip address or serial/usb port of target printer
     - Without `-d` option, the destination is the return value
   - `-p <printer>`: printer control language
     - `escpos`: ESC/POS (Epson)
@@ -122,6 +122,7 @@ receiptio.print(receiptmd, options).then(result => {
     - `svg`: SVG
     - `png`: PNG (requires puppeteer)
     - default: `escpos` (with `-d` option) `svg` (without `-d` option)
+  - `-q`: check printer status without printing
   - `-c <chars>`: characters per line
     - range: `24`-`48`
     - default: `48`
@@ -149,6 +150,7 @@ receiptio.print(receiptmd, options).then(result => {
 
 - With `-d` option &lt;string&gt;
   - `success`: printing success
+  - `online`: printer is online
   - `coveropen`: printer cover is open
   - `paperempty`: no receipt paper
   - `error`: printer error (except cover open and paper empty)
@@ -205,6 +207,7 @@ options:
                     (escpos, sii, citizen, fit, impact, impactb,
                      star, starline, emustarline, stargraphic,
                      svg, png) (png requires puppeteer)
+  -q                check printer status without printing
   -c <chars>        characters per line (24-48) (default: 48)
   -u                upside down
   -s                paper saving (reduce line spacing)
@@ -216,13 +219,14 @@ options:
   -l <language>     language of source file (default: system locale)
                     (en, fr, de, es, po, it, ru, ja, ko, zh-hans, zh-hant, ...)
 print results:
-  success(0), coveropen(101), paperempty(102), error(103),
-  offline(104), disconnect(105), timeout(106)
+  success(0), online(100), coveropen(101), paperempty(102),
+  error(103), offline(104), disconnect(105), timeout(106)
 examples:
   receiptio -d COM1 receiptmd.txt
   receiptio -d /dev/usb/lp0 receiptmd.txt
   receiptio -d /dev/ttyS0 -u -b 160 receiptmd.txt
   receiptio -d 192.168.192.168 -p escpos -c 42 receiptmd.txt
+  receiptio -d com9 -p impact -q
   receiptio receiptmd.txt -o receipt.svg
   receiptio receiptmd.txt -p escpos -i -b 128 -g 1.0 -o receipt.prn
   receiptio < receiptmd.txt -p png > receipt.png

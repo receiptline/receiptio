@@ -24,6 +24,7 @@ const receiptio = require('receiptio');
     // error code
     const code = {
         'success': 0,
+        'online': 100,
         'coveropen': 101,
         'paperempty': 102,
         'error': 103,
@@ -51,7 +52,7 @@ const receiptio = require('receiptio');
     // parse arguments
     for (let i = 0; i < argv.length; i++) {
         const key = argv[i];
-        if (/^-[husni]$/.test(key)) {
+        if (/^-[hqusni]$/.test(key)) {
             // option without value
             params[key[1]] = true;
         }
@@ -91,6 +92,7 @@ options:
                     (escpos, sii, citizen, fit, impact, impactb,
                      star, starline, emustarline, stargraphic,
                      svg, png) (png requires puppeteer)
+  -q                check printer status without printing
   -c <chars>        characters per line (24-48) (default: 48)
   -u                upside down
   -s                paper saving (reduce line spacing)
@@ -102,13 +104,14 @@ options:
   -l <language>     language of source file (default: system locale)
                     (en, fr, de, es, po, it, ru, ja, ko, zh-hans, zh-hant, ...)
 print results:
-  success(0), coveropen(101), paperempty(102), error(103),
-  offline(104), disconnect(105), timeout(106)
+  success(0), online(100), coveropen(101), paperempty(102),
+  error(103), offline(104), disconnect(105), timeout(106)
 examples:
   receiptio -d COM1 receiptmd.txt
   receiptio -d /dev/usb/lp0 receiptmd.txt
   receiptio -d /dev/ttyS0 -u -b 160 receiptmd.txt
   receiptio -d 192.168.192.168 -p escpos -c 42 receiptmd.txt
+  receiptio -d com9 -p impact -q
   receiptio receiptmd.txt -o receipt.svg
   receiptio receiptmd.txt -p escpos -i -b 128 -g 1.0 -o receipt.prn
   receiptio < receiptmd.txt -p png > receipt.png
@@ -119,7 +122,7 @@ examples:
         // options
         const options = argv.join(' ');
         // source
-        const input = source ? fs.createReadStream(source) : process.stdin;
+        const input = params.q ? '' : source ? fs.createReadStream(source) : process.stdin;
         // destination
         const output = params.d ? receiver : params.o ? fs.createWriteStream(params.o) : process.stdout;
         // print or transform

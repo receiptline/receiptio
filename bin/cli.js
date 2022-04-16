@@ -47,7 +47,8 @@ const receiptio = require('receiptio');
     const params = {
         h: false, // show help
         d: '', // ip address or serial/usb port of target printer
-        o: '' // file to output (if -d option is not found)
+        o: '', // file to output (if -d option is not found)
+        q: false // check printer status without printing
     };
     // parse arguments
     for (let i = 0; i < argv.length; i++) {
@@ -102,7 +103,7 @@ options:
   -g <gamma>        image gamma correction (0.1-10.0) (default: 1.8)
   -t <timeout>      print timeout (0-3600 sec) (default: 300)
   -l <language>     language of source file (default: system locale)
-                    (en, fr, de, es, po, it, ru, ja, ko, zh-hans, zh-hant, ...)
+                    (en, fr, de, es, po, it, ru, ja, ko, zh-hans, zh-hant, th, ...)
 print results:
   success(0), online(100), coveropen(101), paperempty(102),
   error(103), offline(104), disconnect(105), timeout(106)

@@ -57,6 +57,8 @@ https://github.com/receiptline/receiptline
 Connect with IP address, serial port, or Linux USB device file.  
 (LAN, Bluetooth SPP, USB with virtual serial port driver, ...)  
 
+Epson TM series (South Asia model) and Star MC series (StarPRNT model) can print with device font of Thai characters.  
+
 # Installation
 
 ```bash
@@ -75,11 +77,17 @@ If serial port is used, [Node SerialPort](https://www.npmjs.com/package/serialpo
 $ npm install -g serialport
 ```
 
-When using `-i` (print as image) or `-p png` (convert to png) option, [puppeteer](https://www.npmjs.com/package/puppeteer) is also required.  
+When using `-i` (print as image) or `-p png` (convert to png) option, [puppeteer](https://www.npmjs.com/package/puppeteer) or [sharp](https://www.npmjs.com/package/sharp) is also required.  
 
 ```bash
 $ npm install -g puppeteer
 ```
+
+```bash
+$ npm install -g sharp
+```
+
+[sharp](https://www.npmjs.com/package/sharp) is not support web fonts and minimizes the area of "invert" character decoration.  
 
 # Usage
 
@@ -120,7 +128,7 @@ receiptio.print(receiptmd, options).then(result => {
     - `emustarline`: Command Emulator Star Line Mode
     - `stargraphic`: Star Graphic Mode
     - `svg`: SVG
-    - `png`: PNG (requires puppeteer)
+    - `png`: PNG (requires puppeteer or sharp)
     - default: `escpos` (with `-d` option) `svg` (without `-d` option)
   - `-q`: check printer status without printing
   - `-c <chars>`: characters per line
@@ -129,7 +137,7 @@ receiptio.print(receiptmd, options).then(result => {
   - `-u`: upside down
   - `-s`: paper saving (reduce line spacing)
   - `-n`: no paper cut
-  - `-i`: print as image (requires puppeteer)
+  - `-i`: print as image (requires puppeteer or sharp)
   - `-b <threshold>`: image thresholding
     - range: `0`-`255`
   - `-g <gamma>`: image gamma correction
@@ -144,6 +152,7 @@ receiptio.print(receiptmd, options).then(result => {
     - `ko`: Korean (ksc5601 characters)
     - `zh-hans`: Simplified Chinese (gb18030 characters)
     - `zh-hant`: Traditional Chinese (big5 characters)
+    - `th`: Thai
     - default: system locale
 
 ### Return value
@@ -206,18 +215,18 @@ options:
                     (default: escpos if -d option is found, svg otherwise)
                     (escpos, sii, citizen, fit, impact, impactb,
                      star, starline, emustarline, stargraphic,
-                     svg, png) (png requires puppeteer)
+                     svg, png) (png requires puppeteer or sharp)
   -q                check printer status without printing
   -c <chars>        characters per line (24-48) (default: 48)
   -u                upside down
   -s                paper saving (reduce line spacing)
   -n                no paper cut
-  -i                print as image (requires puppeteer)
+  -i                print as image (requires puppeteer or sharp)
   -b <threshold>    image thresholding (0-255)
   -g <gamma>        image gamma correction (0.1-10.0) (default: 1.8)
   -t <timeout>      print timeout (0-3600 sec) (default: 300)
   -l <language>     language of source file (default: system locale)
-                    (en, fr, de, es, po, it, ru, ja, ko, zh-hans, zh-hant, ...)
+                    (en, fr, de, es, po, it, ru, ja, ko, zh-hans, zh-hant, th, ...)
 print results:
   success(0), online(100), coveropen(101), paperempty(102),
   error(103), offline(104), disconnect(105), timeout(106)

@@ -92,13 +92,13 @@ options:
                     (default: escpos if -d option is found, svg otherwise)
                     (escpos, sii, citizen, fit, impact, impactb,
                      star, starline, emustarline, stargraphic,
-                     svg, png) (png requires puppeteer)
+                     svg, png) (png requires puppeteer or sharp)
   -q                check printer status without printing
   -c <chars>        characters per line (24-48) (default: 48)
   -u                upside down
   -s                paper saving (reduce line spacing)
   -n                no paper cut
-  -i                print as image (requires puppeteer)
+  -i                print as image (requires puppeteer or sharp)
   -b <threshold>    image thresholding (0-255)
   -g <gamma>        image gamma correction (0.1-10.0) (default: 1.8)
   -t <timeout>      print timeout (0-3600 sec) (default: 300)

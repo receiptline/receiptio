@@ -1,6 +1,21 @@
 # ReceiptIO
 
-A print library for receipt printers, simple and easy API and CLI, printer status support.  
+A print library for receipt printers, simple and easy CLI / API with markdown, printer status support.  
+
+```bash
+$ more receiptmd.txt
+^^^RECEIPT
+
+12/18/2021, 11:22:33 AM
+Asparagus | 1| 1.00
+Broccoli  | 2| 2.00
+Carrot    | 3| 3.00
+---
+^TOTAL | ^6.00
+
+$ receiptio -d 192.168.192.168 -p escpos -c 42 receiptmd.txt
+success
+```
 
 ```javascript
 const receiptio = require('receiptio');
@@ -17,21 +32,6 @@ Carrot    | 3| 3.00
 receiptio.print(receiptmd, '-d 192.168.192.168 -p escpos -c 42').then(result => {
     console.log(result);
 });
-```
-
-```bash
-$ more receiptmd.txt
-^^^RECEIPT
-
-12/18/2021, 11:22:33 AM
-Asparagus | 1| 1.00
-Broccoli  | 2| 2.00
-Carrot    | 3| 3.00
----
-^TOTAL | ^6.00
-
-$ receiptio -d 192.168.192.168 -p escpos -c 42 receiptmd.txt
-success
 ```
 
 ![receipt](example/example.png)  
@@ -90,6 +90,52 @@ $ npm install -g sharp
 [sharp](https://www.npmjs.com/package/sharp) is not support web fonts and minimizes the area of "invert" character decoration.  
 
 # Usage
+
+## CLI
+
+The options are almost the same as for API.  
+
+```console
+usage: receiptio [options] [source]
+source:
+  receipt markdown text file
+  https://receiptline.github.io/designer/
+  if source is not found, standard input
+options:
+  -h                show help
+  -d <destination>  ip address or serial/usb port of target printer
+  -o <outfile>      file to output (if -d option is not found)
+                    if -d and -o are not found, standard output
+  -p <printer>      printer control language
+                    (default: escpos if -d option is found, svg otherwise)
+                    (escpos, sii, citizen, fit, impact, impactb,
+                     star, starline, emustarline, stargraphic,
+                     svg, png) (png requires puppeteer or sharp)
+  -q                check printer status without printing
+  -c <chars>        characters per line (24-48) (default: 48)
+  -u                upside down
+  -s                paper saving (reduce line spacing)
+  -n                no paper cut
+  -i                print as image (requires puppeteer or sharp)
+  -b <threshold>    image thresholding (0-255)
+  -g <gamma>        image gamma correction (0.1-10.0) (default: 1.8)
+  -t <timeout>      print timeout (0-3600 sec) (default: 300)
+  -l <language>     language of source file (default: system locale)
+                    (en, fr, de, es, po, it, ru, ja, ko, zh-hans, zh-hant, th, ...)
+print results:
+  success(0), online(100), coveropen(101), paperempty(102),
+  error(103), offline(104), disconnect(105), timeout(106)
+examples:
+  receiptio -d COM1 receiptmd.txt
+  receiptio -d /dev/usb/lp0 receiptmd.txt
+  receiptio -d /dev/ttyS0 -u -b 160 receiptmd.txt
+  receiptio -d 192.168.192.168 -p escpos -c 42 receiptmd.txt
+  receiptio -d com9 -p impact -q
+  receiptio receiptmd.txt -o receipt.svg
+  receiptio receiptmd.txt -p escpos -i -b 128 -g 1.0 -o receipt.prn
+  receiptio < receiptmd.txt -p png > receipt.png
+  echo {c:1234567890} | receiptio | more
+```
 
 ## API
 
@@ -195,52 +241,6 @@ source.pipe(transform).pipe(destination);
 ### Return value
 
 - Transform stream &lt;stream.Transform&gt;
-
-## CLI
-
-The options are almost the same as for API.  
-
-```console
-usage: receiptio [options] [source]
-source:
-  receipt markdown text file
-  https://receiptline.github.io/designer/
-  if source is not found, standard input
-options:
-  -h                show help
-  -d <destination>  ip address or serial/usb port of target printer
-  -o <outfile>      file to output (if -d option is not found)
-                    if -d and -o are not found, standard output
-  -p <printer>      printer control language
-                    (default: escpos if -d option is found, svg otherwise)
-                    (escpos, sii, citizen, fit, impact, impactb,
-                     star, starline, emustarline, stargraphic,
-                     svg, png) (png requires puppeteer or sharp)
-  -q                check printer status without printing
-  -c <chars>        characters per line (24-48) (default: 48)
-  -u                upside down
-  -s                paper saving (reduce line spacing)
-  -n                no paper cut
-  -i                print as image (requires puppeteer or sharp)
-  -b <threshold>    image thresholding (0-255)
-  -g <gamma>        image gamma correction (0.1-10.0) (default: 1.8)
-  -t <timeout>      print timeout (0-3600 sec) (default: 300)
-  -l <language>     language of source file (default: system locale)
-                    (en, fr, de, es, po, it, ru, ja, ko, zh-hans, zh-hant, th, ...)
-print results:
-  success(0), online(100), coveropen(101), paperempty(102),
-  error(103), offline(104), disconnect(105), timeout(106)
-examples:
-  receiptio -d COM1 receiptmd.txt
-  receiptio -d /dev/usb/lp0 receiptmd.txt
-  receiptio -d /dev/ttyS0 -u -b 160 receiptmd.txt
-  receiptio -d 192.168.192.168 -p escpos -c 42 receiptmd.txt
-  receiptio -d com9 -p impact -q
-  receiptio receiptmd.txt -o receipt.svg
-  receiptio receiptmd.txt -p escpos -i -b 128 -g 1.0 -o receipt.prn
-  receiptio < receiptmd.txt -p png > receipt.png
-  echo {c:1234567890} | receiptio | more
-```
 
 # License
 

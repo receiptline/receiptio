@@ -19,13 +19,13 @@ declare module 'receiptio' {
     /**
      * Print receipts, get printer status, or convert to print images.
      * @param {string} receiptmd receipt markdown text
-     * @param {string} [options] options ([-d destination] [-p printer] [-q] [-c chars] [-u] [-s] [-n] [-i] [-b threshold] [-g gamma] [-t timeout] [-l language])
+     * @param {string} [options] options ([-d destination] [-p printer] [-q] [-c chars] [-u] [-v] [-r] [-s] [-n] [-i] [-b threshold] [-g gamma] [-t timeout] [-l language])
      * @returns {Promise<string>} print result, printer status, or print image
      */
     export function print(receiptmd: string, options?: string): Promise<string>;
     /**
      * Create a transform stream to print receipts, get printer status, or convert to print images.
-     * @param {string} [options] options ([-d destination] [-p printer] [-q] [-c chars] [-u] [-s] [-n] [-i] [-b threshold] [-g gamma] [-t timeout] [-l language])
+     * @param {string} [options] options ([-d destination] [-p printer] [-q] [-c chars] [-u] [-v] [-r] [-s] [-n] [-i] [-b threshold] [-g gamma] [-t timeout] [-l language])
      * @returns {Transform} transform stream
      */
     export function createPrint(options?: string): Transform;

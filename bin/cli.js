@@ -90,9 +90,9 @@ options:
                     if -d and -o are not found, standard output
   -p <printer>      printer control language
                     (default: escpos if -d option is found, svg otherwise)
-                    (escpos, sii, citizen, fit, impact, impactb, generic,
-                     star, starline, emustarline, stargraphic,
-                     svg, png, text) (png requires puppeteer or sharp)
+                    (escpos, epson, sii, citizen, fit, impact, impactb, generic,
+                     star, starline, emustarline, stargraphic, svg, png, text)
+                    (png requires puppeteer or sharp)
   -q                check printer status without printing
   -c <chars>        characters per line (24-48) (default: 48)
   -u                upside down

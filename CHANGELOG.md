@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.6.0] - 2022-11-09
+### Added
+- Landscape orientation
+- "epson" alias for escpos
+- "generic" for generic escpos
+- "text" for plain text output
+
+### Fixed
+- Deprecated buf.slice to buf.subarray
+
 ## [1.5.0] - 2022-06-13
 ### Added
 - TypeScript typings

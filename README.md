@@ -1,6 +1,6 @@
 # ReceiptIO
 
-A print library for receipt printers, simple and easy CLI / API with markdown, printer status support.  
+A print application for receipt printers, simple and easy with markdown, printer status support.  
 
 ```bash
 $ more receiptmd.txt
@@ -108,12 +108,14 @@ options:
                     if -d and -o are not found, standard output
   -p <printer>      printer control language
                     (default: escpos if -d option is found, svg otherwise)
-                    (escpos, sii, citizen, fit, impact, impactb,
-                     star, starline, emustarline, stargraphic,
-                     svg, png) (png requires puppeteer or sharp)
+                    (escpos, epson, sii, citizen, fit, impact, impactb, generic,
+                     star, starline, emustarline, stargraphic, svg, png, text)
+                    (png requires puppeteer or sharp)
   -q                check printer status without printing
-  -c <chars>        characters per line (24-48) (default: 48)
+  -c <chars>        characters per line (24-96) (default: 48)
   -u                upside down
+  -v                landscape orientation (for escpos, epson, sii, citizen, star)
+  -r <dpi>          print resolution for -v (180, 203) (default: 203)
   -s                paper saving (reduce line spacing)
   -n                no paper cut
   -i                print as image (requires puppeteer or sharp)
@@ -163,24 +165,31 @@ receiptio.print(receiptmd, options).then(result => {
   - `-d <destination>`: ip address or serial/usb port of target printer
     - Without `-d` option, the destination is the return value
   - `-p <printer>`: printer control language
-    - `escpos`: ESC/POS (Epson)
+    - `escpos`: ESC/POS
+    - `epson`: ESC/POS (Epson)
     - `sii`: ESC/POS (Seiko Instruments)
     - `citizen`: ESC/POS (Citizen)
     - `fit`: ESC/POS (Fujitsu)
     - `impact`: ESC/POS (TM-U220)
     - `impactb`: ESC/POS (TM-U220 Font B)
+    - `generic`: ESC/POS (Generic) Experimental
     - `star`: StarPRNT
     - `starline`: Star Line Mode
     - `emustarline`: Command Emulator Star Line Mode
     - `stargraphic`: Star Graphic Mode
     - `svg`: SVG
     - `png`: PNG (requires puppeteer or sharp)
+    - `text`: Text
     - default: `escpos` (with `-d` option) `svg` (without `-d` option)
   - `-q`: check printer status without printing
   - `-c <chars>`: characters per line
-    - range: `24`-`48`
+    - range: `24`-`96`
     - default: `48`
   - `-u`: upside down
+  - `-v`: landscape orientation (for `escpos`, `epson`, `sii`, `citizen`, `star`)
+  - `-r <dpi>`:print resolution for `-v`
+    - range: `180`, `203`
+    - default: `203`
   - `-s`: paper saving (reduce line spacing)
   - `-n`: no paper cut
   - `-i`: print as image (requires puppeteer or sharp)
@@ -244,4 +253,7 @@ source.pipe(transform).pipe(destination);
 
 # License
 
-- Apache License, Version 2.0
+- ReceiptIO
+  - Apache License, Version 2.0
+- QR Code Generator for JavaScript with UTF8 Support
+  - MIT License

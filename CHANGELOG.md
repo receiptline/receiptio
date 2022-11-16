@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.6.1] - 2022-11-16
+### Fixed
+- README
+
 ## [1.6.0] - 2022-11-09
 ### Added
 - Landscape orientation

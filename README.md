@@ -38,7 +38,7 @@ receiptio.print(receiptmd, '-d 192.168.192.168 -p escpos -c 42').then(result => 
 
 # Features
 
-ReceiptIO is a simple print library for receipt printers that prints with easy markdown data for receipts and returns printer status. Even without a printer, it can output images.  
+ReceiptIO is a simple print application for receipt printers that prints with easy markdown data for receipts and returns printer status. Even without a printer, it can output images.  
 
 A development tool is provided to edit and preview the receipt markdown.  
 https://receiptline.github.io/designer/  
@@ -91,11 +91,9 @@ $ npm install -g sharp
 
 # Usage
 
-## CLI
-
-The options are almost the same as for API.  
-
 ```console
+$ receiptio -h
+
 usage: receiptio [options] [source]
 source:
   receipt markdown text file
@@ -139,7 +137,89 @@ examples:
   echo {c:1234567890} | receiptio | more
 ```
 
-## API
+## Command
+
+`receiptio [options] [source]`  
+
+## Parameters
+
+- Input
+  - `source`: receipt markdown text file
+    - https://receiptline.github.io/designer/
+  - if source is not found, standard input
+- Output
+  - `-d <destination>`: ip address or serial/usb port of target printer
+  - `-o <outfile>`: file to output (if -d option is not found)
+  - if -d and -o are not found, standard output
+- Printer
+  - `-p <printer>`: printer control language
+    - `escpos`: ESC/POS
+    - `epson`: ESC/POS (Epson)
+    - `sii`: ESC/POS (Seiko Instruments)
+    - `citizen`: ESC/POS (Citizen)
+    - `fit`: ESC/POS (Fujitsu)
+    - `impact`: ESC/POS (TM-U220)
+    - `impactb`: ESC/POS (TM-U220 Font B)
+    - `generic`: ESC/POS (Generic) _Experimental_
+    - `star`: StarPRNT
+    - `starline`: Star Line Mode
+    - `emustarline`: Command Emulator Star Line Mode
+    - `stargraphic`: Star Graphic Mode
+    - `svg`: SVG
+    - `png`: PNG (requires puppeteer or sharp)
+    - `text`: plain text
+    - default: `escpos` (with `-d` option) `svg` (without `-d` option)
+  - `-q`: check printer status without printing
+- Width
+  - `-c <chars>`: characters per line
+    - range: `24`-`96`
+    - default: `48`
+- Orientation
+  - `-u`: upside down
+  - `-v`: landscape orientation (for `escpos`, `epson`, `sii`, `citizen`, `star`)
+  - `-r <dpi>`:print resolution for `-v`
+    - range: `180`, `203`
+    - default: `203`
+- Paper
+  - `-s`: paper saving (reduce line spacing)
+  - `-n`: no paper cut
+- Image
+  - `-i`: print as image (requires puppeteer or sharp)
+  - `-b <threshold>`: image thresholding
+    - range: `0`-`255`
+  - `-g <gamma>`: image gamma correction
+    - range: `0.1`-`10.0`
+    - default: `1.8`
+- Others
+  - `-t <timeout>`: print timeout (sec)
+    - range: `0`-`3600`
+    - default: `300`
+  - `-l <language>`: language of receipt markdown text
+    - `en`, `fr`, `de`, `es`, `po`, `it`, `ru`, ...: Multilingual (cp437, 852, 858, 866, 1252 characters)
+    - `ja`: Japanese (shiftjis characters)
+    - `ko`: Korean (ksc5601 characters)
+    - `zh-hans`: Simplified Chinese (gb18030 characters)
+    - `zh-hant`: Traditional Chinese (big5 characters)
+    - `th`: Thai
+    - default: system locale
+
+## Return value
+
+- With `-d` option
+  - `success(0)`: printing success
+  - `online(100)`: printer is online
+  - `coveropen(101)`: printer cover is open
+  - `paperempty(102)`: no receipt paper
+  - `error(103)`: printer error (except cover open and paper empty)
+  - `offline(104)`: printer is off or offline
+  - `disconnect(105)`: printer is not connected
+  - `timeout(106)`: print timeout
+- Without `-d` option
+  - printer commands or images
+
+# API
+
+## Print (Convert) API
 
 ```javascript
 // async/await
@@ -172,14 +252,14 @@ receiptio.print(receiptmd, options).then(result => {
     - `fit`: ESC/POS (Fujitsu)
     - `impact`: ESC/POS (TM-U220)
     - `impactb`: ESC/POS (TM-U220 Font B)
-    - `generic`: ESC/POS (Generic) Experimental
+    - `generic`: ESC/POS (Generic) _Experimental_
     - `star`: StarPRNT
     - `starline`: Star Line Mode
     - `emustarline`: Command Emulator Star Line Mode
     - `stargraphic`: Star Graphic Mode
     - `svg`: SVG
     - `png`: PNG (requires puppeteer or sharp)
-    - `text`: Text
+    - `text`: plain text
     - default: `escpos` (with `-d` option) `svg` (without `-d` option)
   - `-q`: check printer status without printing
   - `-c <chars>`: characters per line

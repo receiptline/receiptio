@@ -165,6 +165,9 @@ examples:
     - `starline`: Star Line Mode
     - `emustarline`: Command Emulator Star Line Mode
     - `stargraphic`: Star Graphic Mode
+    - `starimpact`: Star Mode on dot impact printers _Experimental_
+    - `starimpact2`: Star Mode on dot impact printers (Font 5x9 2P-1) _Experimental_
+    - `starimpact3`: Star Mode on dot impact printers (Font 5x9 3P-1) _Experimental_
     - `svg`: SVG
     - `png`: PNG (requires puppeteer or sharp)
     - `text`: plain text

@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.7.0] - 2022-12-12
+### Added
+- "starimpact" for Star impact printers
+
 ## [1.6.1] - 2022-11-16
 ### Fixed
 - README

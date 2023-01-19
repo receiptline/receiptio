@@ -107,7 +107,8 @@ options:
   -p <printer>      printer control language
                     (default: escpos if -d option is found, svg otherwise)
                     (escpos, epson, sii, citizen, fit, impact, impactb, generic,
-                     star, starline, emustarline, stargraphic, svg, png, text)
+                     star, starline, emustarline, stargraphic,
+                     starimpact, starimpact2, starimpact3, svg, png, text)
                     (png requires puppeteer or sharp)
   -q                check printer status without printing
   -c <chars>        characters per line (24-96) (default: 48)
@@ -260,6 +261,9 @@ receiptio.print(receiptmd, options).then(result => {
     - `starline`: Star Line Mode
     - `emustarline`: Command Emulator Star Line Mode
     - `stargraphic`: Star Graphic Mode
+    - `starimpact`: Star Mode on dot impact printers _Experimental_
+    - `starimpact2`: Star Mode on dot impact printers (Font 5x9 2P-1) _Experimental_
+    - `starimpact3`: Star Mode on dot impact printers (Font 5x9 3P-1) _Experimental_
     - `svg`: SVG
     - `png`: PNG (requires puppeteer or sharp)
     - `text`: plain text

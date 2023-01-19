@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.7.1] - 2023-01-19
+### Fixed
+- A bug that disabled landscape orientation in file/standard output
+
 ## [1.7.0] - 2022-12-12
 ### Added
 - "starimpact" for Star impact printers

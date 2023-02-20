@@ -117,6 +117,7 @@ options:
   -r <dpi>          print resolution for -v (180, 203) (default: 203)
   -s                paper saving (reduce line spacing)
   -n                no paper cut
+  -m [<l>][,<r>]    print margin (left: 0-24, right: 0-24) (default: 0,0)
   -i                print as image (requires puppeteer or sharp)
   -b <threshold>    image thresholding (0-255)
   -g <gamma>        image gamma correction (0.1-10.0) (default: 1.8)
@@ -181,12 +182,16 @@ examples:
 - Orientation
   - `-u`: upside down
   - `-v`: landscape orientation (for `escpos`, `epson`, `sii`, `citizen`, `star`)
-  - `-r <dpi>`:print resolution for `-v`
-    - range: `180`, `203`
+  - `-r <dpi>`: print resolution for `-v`
+    - values: `180`, `203`
     - default: `203`
 - Paper
   - `-s`: paper saving (reduce line spacing)
   - `-n`: no paper cut
+  - `-m [<left>][,<right>]`: print margin
+    - range (left): `0`-`24`
+    - range (right): `0`-`24`
+    - default: `0,0`
 - Image
   - `-i`: print as image (requires puppeteer or sharp)
   - `-b <threshold>`: image thresholding
@@ -272,10 +277,14 @@ receiptio.print(receiptmd, options).then(result => {
   - `-c <chars>`: characters per line
     - range: `24`-`96`
     - default: `48`
+  - `-m [<left>][,<right>]`: print margin
+    - range (left): `0`-`24`
+    - range (right): `0`-`24`
+    - default: `0,0`
   - `-u`: upside down
   - `-v`: landscape orientation (for `escpos`, `epson`, `sii`, `citizen`, `star`)
   - `-r <dpi>`:print resolution for `-v`
-    - range: `180`, `203`
+    - values: `180`, `203`
     - default: `203`
   - `-s`: paper saving (reduce line spacing)
   - `-n`: no paper cut

@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.8.0] - 2023-02-20
+### Added
+- Print margin
+
 ## [1.7.1] - 2023-01-19
 ### Fixed
 - A bug that disabled landscape orientation in file/standard output

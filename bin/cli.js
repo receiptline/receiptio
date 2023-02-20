@@ -57,7 +57,7 @@ const receiptio = require('receiptio');
             // option without value
             params[key[1]] = true;
         }
-        else if (/^-[dopcrbgtl]$/.test(key)) {
+        else if (/^-[dopcrmbgtl]$/.test(key)) {
             // option with value
             if (i < argv.length - 1) {
                 const value = argv[i + 1];
@@ -101,6 +101,7 @@ options:
   -r <dpi>          print resolution for -v (180, 203) (default: 203)
   -s                paper saving (reduce line spacing)
   -n                no paper cut
+  -m [<l>][,<r>]    print margin (left: 0-24, right: 0-24) (default: 0,0)
   -i                print as image (requires puppeteer or sharp)
   -b <threshold>    image thresholding (0-255)
   -g <gamma>        image gamma correction (0.1-10.0) (default: 1.8)

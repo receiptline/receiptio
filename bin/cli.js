@@ -112,14 +112,14 @@ print results:
   success(0), online(100), coveropen(101), paperempty(102),
   error(103), offline(104), disconnect(105), timeout(106)
 examples:
-  receiptio -d COM1 receiptmd.txt
-  receiptio -d /dev/usb/lp0 receiptmd.txt
-  receiptio -d /dev/ttyS0 -u -b 160 receiptmd.txt
-  receiptio -d 192.168.192.168 -p escpos -c 42 receiptmd.txt
+  receiptio -d COM1 receiptmd.receipt
+  receiptio -d /dev/usb/lp0 receiptmd.receipt
+  receiptio -d /dev/ttyS0 -u -b 160 receiptmd.receipt
+  receiptio -d 192.168.192.168 -p escpos -c 42 receiptmd.receipt
   receiptio -d com9 -p impact -q
-  receiptio receiptmd.txt -o receipt.svg
-  receiptio receiptmd.txt -p escpos -i -b 128 -g 1.0 -o receipt.prn
-  receiptio < receiptmd.txt -p png > receipt.png
+  receiptio receiptmd.receipt -o receipt.svg
+  receiptio receiptmd.receipt -p escpos -i -b 128 -g 1.0 -o receipt.prn
+  receiptio < receiptmd.receipt -p png > receipt.png
   echo {c:1234567890} | receiptio | more`);
         process.exitCode = 1;
     }

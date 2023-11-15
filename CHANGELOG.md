@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.9.0] - 2023-11-15
+### Added
+- Support for new headless mode of puppeteer
+- Serial port options
+
+### Changed
+- File extension from .txt to .receipt
+
 ## [1.8.0] - 2023-02-20
 ### Added
 - Print margin

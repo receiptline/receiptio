@@ -1,6 +1,6 @@
 {
   "name": "receiptio",
-  "version": "1.8.0",
+  "version": "1.9.0",
   "description": "A print application for receipt printers, simple and easy with markdown, printer status support.",
   "main": "./lib/receiptio.js",
   "types": "./lib/receiptio.d.ts",
@@ -41,7 +41,7 @@
   },
   "homepage": "https://github.com/receiptline/receiptio#readme",
   "dependencies": {
-    "receiptline": "^1.15.0",
+    "receiptline": "^1.16.0",
     "iconv-lite": "^0.6.0",
     "pngjs": "^5.0.0"
   },

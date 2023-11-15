@@ -347,6 +347,30 @@ source.pipe(transform).pipe(destination);
 
 - Transform stream &lt;stream.Transform&gt;
 
+# Serial port options
+
+```
+-d COM1:115200,N,8,1
+```
+
+- `-d <destination>`
+  - the system path of the serial port
+  - `<system path>[:<options>]`
+- `<options>`
+  - `<baud rate>,<parity>,<data bits>,<stop bits>[,<flow control>]`
+  - default: `115200,N,8,1,N`
+  - commas can be omitted
+- `<baud rate>`
+  - `2400`, `4800`, `9600`, `19200`, `38400`, `57600`, `115200`
+- `<parity>`
+  - `N`: none, `E`: even, `O`: odd
+- `<data bits>`
+  - `8`, `7`
+- `<stop bits>`
+  - `1`, `2`
+- `<flow control>`
+  - `N`: none, `R`: rts/cts, `X`: xon/xoff
+
 # License
 
 - ReceiptIO

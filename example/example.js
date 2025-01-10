@@ -33,6 +33,6 @@ ${transaction.items.map(item => `${item.name} | ${item.quantity}| ${item.amount}
 ---
 ^TOTAL | ^${transaction.total}`;
 
-receiptio.print(template, '-d 192.168.192.168 -p escpos -c 42').then(result => {
+receiptio.print(template, '-d 192.168.192.168 -c 42').then(result => {
     console.log(result);
 });

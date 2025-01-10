@@ -95,8 +95,7 @@ options:
   -d <destination>  ip address or serial/usb port of target printer
   -o <outfile>      file to output (if -d option is not present)
                     if -d and -o are not present, standard output
-  -p <printer>      printer control language
-                    (default: escpos if -d option is found, svg otherwise)
+  -p <printer>      printer control language (default: auto detection)
                     (escpos/epson/sii/citizen/fit/impact/impactb/generic/
                      star/starline/emustarline/stargraphic/
                      starimpact/starimpact2/starimpact3/svg/png/txt/text)

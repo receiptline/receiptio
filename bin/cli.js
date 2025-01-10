@@ -104,7 +104,7 @@ options:
   -m [<l>][,<r>]    print margin (left: 0-24, right: 0-24) (default: 0,0)
   -i                print as image (requires puppeteer or sharp)
   -b <threshold>    image thresholding (0-255)
-  -g <gamma>        image gamma correction (0.1-10.0) (default: 1.8)
+  -g <gamma>        image gamma correction (0.1-10.0) (default: 1.0)
   -t <timeout>      print timeout (0-3600 sec) (default: 300)
   -l <language>     language of source file (default: system locale)
                     (en, fr, de, es, po, it, ru, ja, ko, zh-hans, zh-hant, th, ...)
@@ -118,7 +118,7 @@ examples:
   receiptio -d 192.168.192.168 -p escpos -c 42 receiptmd.receipt
   receiptio -d com9 -p impact -q
   receiptio receiptmd.receipt -o receipt.svg
-  receiptio receiptmd.receipt -p escpos -i -b 128 -g 1.0 -o receipt.prn
+  receiptio receiptmd.receipt -p escpos -i -b 128 -g 1.8 -o receipt.prn
   receiptio < receiptmd.receipt -p png > receipt.png
   echo {c:1234567890} | receiptio | more`);
         process.exitCode = 1;

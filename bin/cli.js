@@ -92,7 +92,7 @@ options:
                     (default: escpos if -d option is found, svg otherwise)
                     (escpos, epson, sii, citizen, fit, impact, impactb, generic,
                      star, starline, emustarline, stargraphic,
-                     starimpact, starimpact2, starimpact3, svg, png, text)
+                     starimpact, starimpact2, starimpact3, svg, png, txt, text)
                     (png requires puppeteer or sharp)
   -q                check printer status without printing
   -c <chars>        characters per line (24-96) (default: 48)

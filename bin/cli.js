@@ -119,14 +119,15 @@ print results:
   error(103), offline(104), disconnect(105), timeout(106),
   drawerclosed(200), draweropen(201)
 examples:
+  receiptio -d com9 -q
   receiptio -d COM1 example.receipt
   receiptio -d /dev/usb/lp0 example.receipt
   receiptio -d /dev/ttyS0 -u -b 160 example.receipt
-  receiptio -d 192.168.192.168 -p escpos -c 42 example.receipt
-  receiptio -d com9 -p impact -q
-  receiptio example.receipt -o receipt.svg
+  receiptio -d 192.168.192.168 -c 42 example.receipt
+  receiptio example.receipt -o receipt.png
+  receiptio example.receipt -o receipt.txt
   receiptio example.receipt -p escpos -i -b 128 -g 1.8 -o receipt.prn
-  receiptio < example.receipt -p png > receipt.png
+  receiptio < example.receipt > receipt.svg
   echo {c:1234567890} | receiptio | more`);
         process.exitCode = 1;
     }

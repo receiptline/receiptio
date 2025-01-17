@@ -130,14 +130,15 @@ print results:
   error(103), offline(104), disconnect(105), timeout(106),
   drawerclosed(200), draweropen(201)
 examples:
+  receiptio -d com9 -q
   receiptio -d COM1 example.receipt
   receiptio -d /dev/usb/lp0 example.receipt
   receiptio -d /dev/ttyS0 -u -b 160 example.receipt
-  receiptio -d 192.168.192.168 -p escpos -c 42 example.receipt
-  receiptio -d com9 -p impact -q
-  receiptio example.receipt -o receipt.svg
+  receiptio -d 192.168.192.168 -c 42 example.receipt
+  receiptio example.receipt -o receipt.png
+  receiptio example.receipt -o receipt.txt
   receiptio example.receipt -p escpos -i -b 128 -g 1.8 -o receipt.prn
-  receiptio < example.receipt -p png > receipt.png
+  receiptio < example.receipt > receipt.svg
   echo {c:1234567890} | receiptio | more
 ```
 
@@ -155,29 +156,6 @@ examples:
   - `-d <destination>`: ip address or serial/usb port of target printer
   - `-o <outfile>`: file to output (if -d option is not found)
   - if -d and -o are not found, standard output
-- Printer
-  - `-p <printer>`: printer control language
-    - `escpos`: ESC/POS
-    - `epson`: ESC/POS (Epson)
-    - `sii`: ESC/POS (Seiko Instruments)
-    - `citizen`: ESC/POS (Citizen)
-    - `fit`: ESC/POS (Fujitsu)
-    - `impact`: ESC/POS (TM-U220)
-    - `impactb`: ESC/POS (TM-U220 Font B)
-    - `generic`: ESC/POS (Generic) _Experimental_
-    - `star`: StarPRNT
-    - `starline`: Star Line Mode
-    - `emustarline`: Command Emulator Star Line Mode
-    - `stargraphic`: Star Graphic Mode
-    - `starimpact`: Star Mode on dot impact printers _Experimental_
-    - `starimpact2`: Star Mode on dot impact printers (Font 5x9 2P-1) _Experimental_
-    - `starimpact3`: Star Mode on dot impact printers (Font 5x9 3P-1) _Experimental_
-    - `svg`: SVG
-    - `png`: PNG (requires puppeteer or sharp)
-    - `txt`: plain text
-    - `text`: plain text
-    - default: auto detection (`epson`, `sii`, `citizen`, `fit`, `impactb`, `generic`, `star`)
-    - default: `svg` (without `-d` option)
 - Status
   - `-q [<device>]`: inquire device status without printing
     - `printer`: printer
@@ -220,6 +198,27 @@ examples:
     - `zh-hant`: Traditional Chinese (big5 characters)
     - `th`: Thai
     - default: system locale
+  - `-p <printer>`: printer control language
+    - `escpos`: ESC/POS
+    - `epson`: ESC/POS (Epson)
+    - `sii`: ESC/POS (Seiko Instruments)
+    - `citizen`: ESC/POS (Citizen)
+    - `fit`: ESC/POS (Fujitsu)
+    - `impact`: ESC/POS (TM-U220)
+    - `impactb`: ESC/POS (TM-U220 Font B)
+    - `generic`: ESC/POS (Generic) _Experimental_
+    - `star`: StarPRNT
+    - `starline`: Star Line Mode
+    - `emustarline`: Command Emulator Star Line Mode
+    - `stargraphic`: Star Graphic Mode
+    - `starimpact`: Star Mode on dot impact printers _Experimental_
+    - `starimpact2`: Star Mode on dot impact printers (Font 5x9 2P-1) _Experimental_
+    - `starimpact3`: Star Mode on dot impact printers (Font 5x9 3P-1) _Experimental_
+    - `svg`: SVG
+    - `png`: PNG (requires puppeteer or sharp)
+    - `txt`: plain text
+    - `text`: plain text
+    - default: auto detection (`epson`, `sii`, `citizen`, `fit`, `impactb`, `generic`, `star`, `svg`, `png`, `txt`)
 
 ## Return value
 
@@ -264,28 +263,6 @@ receiptio.print(markdown, options).then(result => {
 - `options` &lt;string&gt;
   - `-d <destination>`: ip address or serial/usb port of target printer
     - Without `-d` option, the destination is the return value
-  - `-p <printer>`: printer control language
-    - `escpos`: ESC/POS
-    - `epson`: ESC/POS (Epson)
-    - `sii`: ESC/POS (Seiko Instruments)
-    - `citizen`: ESC/POS (Citizen)
-    - `fit`: ESC/POS (Fujitsu)
-    - `impact`: ESC/POS (TM-U220)
-    - `impactb`: ESC/POS (TM-U220 Font B)
-    - `generic`: ESC/POS (Generic) _Experimental_
-    - `star`: StarPRNT
-    - `starline`: Star Line Mode
-    - `emustarline`: Command Emulator Star Line Mode
-    - `stargraphic`: Star Graphic Mode
-    - `starimpact`: Star Mode on dot impact printers _Experimental_
-    - `starimpact2`: Star Mode on dot impact printers (Font 5x9 2P-1) _Experimental_
-    - `starimpact3`: Star Mode on dot impact printers (Font 5x9 3P-1) _Experimental_
-    - `svg`: SVG
-    - `png`: PNG (requires puppeteer or sharp)
-    - `txt`: plain text
-    - `text`: plain text
-    - default: auto detection (`epson`, `sii`, `citizen`, `fit`, `impactb`, `generic`, `star`)
-    - default: `svg` (without `-d` option)
   - `-q [<device>]`: inquire device status without printing
     - `printer`: printer
     - `drawer`: cash drawer
@@ -322,6 +299,27 @@ receiptio.print(markdown, options).then(result => {
     - `zh-hant`: Traditional Chinese (big5 characters)
     - `th`: Thai
     - default: system locale
+  - `-p <printer>`: printer control language
+    - `escpos`: ESC/POS
+    - `epson`: ESC/POS (Epson)
+    - `sii`: ESC/POS (Seiko Instruments)
+    - `citizen`: ESC/POS (Citizen)
+    - `fit`: ESC/POS (Fujitsu)
+    - `impact`: ESC/POS (TM-U220)
+    - `impactb`: ESC/POS (TM-U220 Font B)
+    - `generic`: ESC/POS (Generic) _Experimental_
+    - `star`: StarPRNT
+    - `starline`: Star Line Mode
+    - `emustarline`: Command Emulator Star Line Mode
+    - `stargraphic`: Star Graphic Mode
+    - `starimpact`: Star Mode on dot impact printers _Experimental_
+    - `starimpact2`: Star Mode on dot impact printers (Font 5x9 2P-1) _Experimental_
+    - `starimpact3`: Star Mode on dot impact printers (Font 5x9 3P-1) _Experimental_
+    - `svg`: SVG
+    - `png`: PNG (requires puppeteer or sharp)
+    - `txt`: plain text
+    - `text`: plain text
+    - default: auto detection (`epson`, `sii`, `citizen`, `fit`, `impactb`, `generic`, `star`, `svg`, `png`, `txt`)
 
 ### Return value
 

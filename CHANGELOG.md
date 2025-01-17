@@ -1,5 +1,9 @@
 # Changelog
 
+## [2.1.0] - 2025-01-17
+### Added
+- Automatic detection by output file extension
+
 ## [2.0.0] - 2025-01-11
 ### Added
 - Automatic printer detection

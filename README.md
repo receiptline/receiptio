@@ -106,11 +106,6 @@ options:
   -d <destination>  ip address or serial/usb port of target printer
   -o <outfile>      file to output (if -d option is not present)
                     if -d and -o are not present, standard output
-  -p <printer>      printer control language (default: auto detection)
-                    (escpos/epson/sii/citizen/fit/impact/impactb/generic/
-                     star/starline/emustarline/stargraphic/
-                     starimpact/starimpact2/starimpact3/svg/png/txt/text)
-                    (png requires puppeteer or sharp)
   -q [<device>]     inquire status (printer/drawer/drawer2) (default: printer)
   -c <chars>        characters per line (24-96) (default: 48)
   -u                upside down
@@ -125,6 +120,11 @@ options:
   -t <timeout>      print timeout (0-3600 sec) (default: 300)
   -l <language>     language of source file (default: system locale)
                     (en/fr/de/es/po/it/ru/ja/ko/zh-hans/zh-hant/th/...)
+  -p <printer>      printer control language (default: auto detection)
+                    (escpos/epson/sii/citizen/fit/impact/impactb/generic/
+                     star/starline/emustarline/stargraphic/
+                     starimpact/starimpact2/starimpact3/svg/png/txt/text)
+                    (png requires puppeteer or sharp)
 print results:
   success(0), online(100), coveropen(101), paperempty(102),
   error(103), offline(104), disconnect(105), timeout(106),

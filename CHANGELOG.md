@@ -1,5 +1,9 @@
 # Changelog
 
+## [2.1.1] - 2025-01-18
+### Fixed
+- Help messages
+
 ## [2.1.0] - 2025-01-17
 ### Added
 - Automatic detection by output file extension

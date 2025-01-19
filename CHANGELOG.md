@@ -1,5 +1,9 @@
 # Changelog
 
+## [2.1.2] - 2025-01-19
+### Fixed
+- For bug fixes in sharp v0.32.4
+
 ## [2.1.1] - 2025-01-18
 ### Fixed
 - Help messages

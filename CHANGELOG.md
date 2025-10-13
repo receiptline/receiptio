@@ -1,5 +1,10 @@
 # Changelog
 
+## [2.1.3] - 2025-10-13
+### Fixed
+- Bugs in UPC and EAN for SII Landscape
+- Redundant code
+
 ## [2.1.2] - 2025-01-19
 ### Fixed
 - For bug fixes in sharp v0.32.4

@@ -1,5 +1,10 @@
 # Changelog
 
+## [2.1.4] - 2025-10-16
+### Fixed
+- Bugs with symbols in Star Landscape
+- Redundant code patterns
+
 ## [2.1.3] - 2025-10-13
 ### Fixed
 - Bugs in UPC and EAN for SII Landscape

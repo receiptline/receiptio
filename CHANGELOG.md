@@ -1,5 +1,10 @@
 # Changelog
 
+## [3.0.1] - 2025-11-28
+### Fixed
+- For bug fixes in sharp v0.34.0
+- Text decoration in PNG output using sharp
+
 ## [3.0.0] - 2025-10-25
 ### Changed
 - QR code generator

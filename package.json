@@ -1,6 +1,6 @@
 {
   "name": "receiptio",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "A print application for receipt printers, simple and easy with markdown, printer status support.",
   "main": "./lib/receiptio.js",
   "types": "./lib/receiptio.d.ts",

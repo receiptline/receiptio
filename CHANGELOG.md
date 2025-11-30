@@ -1,5 +1,10 @@
 # Changelog
 
+## [3.0.0] - 2025-11-30
+### Changed
+- Japanese font for SVG/PNG output
+- SVG filter ID to include UUID
+
 ## [3.0.1] - 2025-11-28
 ### Fixed
 - For bug fixes in sharp v0.34.0

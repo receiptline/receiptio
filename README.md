@@ -1,6 +1,6 @@
 # ReceiptIO
 
-A print application for receipt printers, simple and easy with markdown, printer status support.  
+Node.js printing application for receipt printers, simple and easy with receipt markdown, printer status support.  
 
 ```bash
 $ more example.receipt
@@ -38,9 +38,9 @@ receiptio.print(markdown, '-d 192.168.192.168 -c 42').then(result => {
 
 # Features
 
-ReceiptIO is a simple print application for receipt printers that prints with easy markdown data for receipts and returns printer status. Even without a printer, it can output images.  
+ReceiptIO is a simple printing application for receipt printers that prints with easy markdown data for receipts and returns printer status. Even without a printer, it can output images.  
 
-**New!** ReceiptIO now auto-detects printer models for seamless printing.  
+ReceiptIO auto-detects printer models for seamless printing.  
 
 A development tool is provided to edit and preview the receipt markdown.  
 https://receiptline.github.io/receiptjs-designer/  

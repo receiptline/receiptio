@@ -1,6 +1,13 @@
 # Changelog
 
-## [3.0.0] - 2025-11-30
+## [5.0.0] - 2026-02-01
+### Changed
+- SVG output from SVG 1.1 to SVG 2
+
+### Fixed
+- PNG output to ignore landscape and margin
+
+## [4.0.0] - 2025-11-30
 ### Changed
 - Japanese font for SVG/PNG output
 - SVG filter ID to include UUID

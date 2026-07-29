@@ -1,6 +1,6 @@
 {
   "name": "receiptio",
-  "version": "5.0.0",
+  "version": "5.0.1",
   "description": "Node.js printing application for receipt printers, simple and easy with receipt markdown, printer status support.",
   "main": "./lib/receiptio.js",
   "types": "./lib/receiptio.d.ts",
@@ -34,7 +34,7 @@
     "png",
     "markdown"
   ],
-  "author": "Open Foodservice System Consortium",
+  "author": "Open Foodservice System Consortium, OpenReceipt Project",
   "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/receiptline/receiptio/issues"

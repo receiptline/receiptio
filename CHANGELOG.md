@@ -1,5 +1,12 @@
 # Changelog
 
+## [5.0.1] - 2026-07-29
+### Added
+- Project name
+
+### Changed
+- The design tool to Receipt.js Designer
+
 ## [5.0.0] - 2026-02-01
 ### Changed
 - SVG output from SVG 1.1 to SVG 2

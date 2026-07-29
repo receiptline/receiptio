@@ -99,7 +99,7 @@ $ receiptio -h
 usage: receiptio [options] [source]
 source:
   receipt markdown text file
-  https://receiptline.github.io/designer/
+  https://receiptline.github.io/receiptjs-designer/
   if source is not present, standard input
 options:
   -h                show help
@@ -259,7 +259,7 @@ receiptio.print(markdown, options).then(result => {
 
 - `markdown` &lt;string&gt;
   - receipt markdown text
-    - https://receiptline.github.io/designer/
+    - https://receiptline.github.io/receiptjs-designer/
 - `options` &lt;string&gt;
   - `-d <destination>`: ip address or serial/usb port of target printer
     - Without `-d` option, the destination is the return value

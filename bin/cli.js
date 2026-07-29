@@ -89,7 +89,7 @@ const receiptio = require('receiptio');
 usage: receiptio [options] [source]
 source:
   receipt markdown text file
-  https://receiptline.github.io/designer/
+  https://receiptline.github.io/receiptjs-designer/
   if source is not present, standard input
 options:
   -h                show help
